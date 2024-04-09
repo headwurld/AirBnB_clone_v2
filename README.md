@@ -2,7 +2,7 @@
 
 This repository contains the initial stage of a student project to build a clone of the AirBnB website. This stage implements a backend interface, or console, to manage program data. Console commands allow the user to create, update, and destroy objects, as well as manage file storage. Using a system of JSON serialization/deserialization, storage is persistent between sessions.
 
----
+----
 
 <center><h3>Repository Contents by Project Task</h3> </center>
 
@@ -80,7 +80,7 @@ Usage: create <class_name>
 3aa5babc-efb6-4041-bfe9-3cc9727588f8
 (hbnb)                   
 ```
-###### Example 1: Show an object
+#### Example 1: Show an object
 Usage: show <class_name> <_id>
 
 ```
@@ -107,6 +107,7 @@ Usage: update <class_name> <_id>
 (hbnb)
 ```
 <h3>Alternative Syntax</h3>
+
 
 ###### Example 0: Show all User objects
 Usage: <class_name>.all()
