@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+i#!/usr/bin/python3
 """ Console Module """
 import cmd
 import sys
@@ -113,14 +113,53 @@ class HBNBCommand(cmd.Cmd):
         """ Overrides the emptyline method of CMD """
         pass
 
-    def do_create(self, args):
-        """ Create an object of any class"""
-        if not args:
-            print("** class name missing **")
+        def do_create(self, arg):
+    """
+    Creates a new instance of a class with given parameters.
+
+    Args:
+        arg (str): String containing the class name and parameters.
+
+    Returns:
+        None
+    """
+    if not arg:
+        print("** class name missing **")
+        return
+
+    args = arg.split()
+    class_name = args[0]
+
+    if class_name not in self.classes:
+        print("** class doesn't exist **")
+        return
+
+    params = {}
+    for param in args[1:]:
+        key_value = param.split('=')
+        if len(key_value) != 2:
+            print("** invalid parameter format: '{}' **".format(param))
             return
-        elif args not in HBNBCommand.classes:
-            print("** class doesn't exist **")
-            return
+        key, value = key_value
+        # Process value to handle different types
+        if value.startswith('"') and value.endswith('"'):
+            # String
+            value = value[1:-1].replace('_', ' ').replace('\\"', '"')
+        elif '.' in value:
+            # Float
+            try:
+                value = float(value)
+            except ValueError:
+                print("** invalid float value: '{}' **".format(value))
+                return
+        else:
+            # Integer
+            try:
+                value = int(value)
+            except ValueError:
+                print("** invalid integer value: '{}' **".format(value))
+                return
+        params[key] = value
         new_instance = HBNBCommand.classes[args]()
         storage.save()
         print(new_instance.id)
